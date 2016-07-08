@@ -41,7 +41,7 @@ int SrtpCryptoSuiteFromName(const std::string& crypto_suite) {
 int main(int argc, char* argv[])
 {
 
-	if (argc < 3) {
+	if (argc < 6) {
 		std::cerr << "Usage: srtp_decoder[.exe] input_tcpdump_pcap_path output_decoded_payload_path ssrc_rtp_hex_format Base64_master_key sha_Crypto_Suite" << std::endl;
 		std::cerr << "Example: srtp_decoder.exe D:\\temp\\pcaps\\marseillaise-srtp.pcap D:\\temp\\output.alw 0xdeadbeef aSBrbm93IGFsbCB5b3VyIGxpdHRsZSBzZWNyZXRz AES_CM_128_HMAC_SHA1_80" << std::endl;
 		return 1;
@@ -59,7 +59,6 @@ int main(int argc, char* argv[])
 	std::cout << "32-bit SSRC identifier carried: 0x" << std::hex << ssrc << std::dec << std::endl;
 	std::cout << "AES Base64 crypto key: " << keyBase64 << std::endl;
 	std::cout << "Crypto-Suite: " << sha << std::endl;
-
 
 	std::cout << std::endl << "Start read pcap" << std::endl;
 	bool succ = read_pcap(input_path);
