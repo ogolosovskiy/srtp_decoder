@@ -1,0 +1,50 @@
+
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:L3goYM0ydXTQP+hBacCiw1omibl5rMesA7TYQZ02
+a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:7SYMKhu8sVMhCr4VXh+ZqkteB01QgqDSgLr4L9iU
+
+ssrc:3499283094 
+
+2016-07-08 13:50:45.103 Button[9087:293133] [voe] [VOE_DBG] send message kSigMethodInvite, id:75170BA3_1
+2016-07-08 13:50:45.104 Button[9087:293133] [voe] [VOE_DBG] send message:
+2016-07-08 13:50:45.104 Button[9087:293133] [voe] [VOE_DBG] _id:            75170BA3_1
+2016-07-08 13:50:45.104 Button[9087:293133] [voe] [VOE_DBG] _to:            US_468860bf65f8f7820c03a34484771d6e785b9494
+2016-07-08 13:50:45.104 Button[9087:293133] [voe] [VOE_DBG] _from:          08ab7725ceb412cd65386dad279b772eda139472
+2016-07-08 13:50:45.104 Button[9087:293133] [voe] [VOE_DBG] _from_device:   57345A0DCDCE980DDE000001
+2016-07-08 13:50:45.105 Button[9087:293133] [voe] [VOE_DBG] _to_device:     56C2EB27DB8EED0DC500001C
+2016-07-08 13:50:45.105 Button[9087:293133] [voe] [VOE_DBG] _to_device:     561E23FF011F150015000061
+2016-07-08 13:50:45.105 Button[9087:293133] [voe] [VOE_DBG] _to_device:     56254B1E7049480018000067
+2016-07-08 13:50:45.105 Button[9087:293133] [voe] [VOE_DBG] _to_device:     56C2F3F8DB8EED0DC500005F
+2016-07-08 13:50:45.106 Button[9087:293133] [voe] [VOE_DBG] _to_device:     56D01217843E7D0DCD000001
+2016-07-08 13:50:45.106 Button[9087:293133] [voe] [VOE_DBG] _to_device:     56D1AD9344B2300DCD000233
+2016-07-08 13:50:45.106 Button[9087:293133] [voe] [VOE_DBG] _to_device:     56E6CAB9B37FD00DC8000064
+2016-07-08 13:50:45.106 Button[9087:293133] [voe] [VOE_DBG] _type:          kSigMethodInvite
+2016-07-08 13:50:45.106 Button[9087:293133] [voe] [VOE_DBG] _order:         1
+2016-07-08 13:50:45.107 Button[9087:293133] [voe] [VOE_DBG] _version:       1.0
+2016-07-08 13:50:45.107 Button[9087:293133] [voe] [VOE_DBG] _bin_date:      
+{
+    "call_id" : "d3b729cb",
+    "sdp" : "v=0\r\no=- 8622565663983486169 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE audio\r\na=msid-semantic: WMS streamSCaudio\r\nm=audio 9 RTP/SAVPF 8 111 103 104 9 102 0 106 105 13 127 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:deRIjUdWWgD9lRbt\r\na=ice-pwd:0DEo6kQDv/Jk2mCvNvORM2WK\r\na=mid:audio\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=sendrecv\r\na=rtcp-mux\r\na=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:L3goYM0ydXTQP+hBacCiw1omibl5rMesA7TYQZ02\r\na=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:7SYMKhu8sVMhCr4VXh+ZqkteB01QgqDSgLr4L9iU\r\na=rtpmap:111 opus/48000/2\r\na=fmtp:111 minptime=10; useinbandfec=1\r\na=rtpmap:103 ISAC/16000\r\na=rtpmap:104 ISAC/32000\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:106 CN/32000\r\na=rtpmap:105 CN/16000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:127 red/8000\r\na=rtpmap:126 telephone-event/8000\r\na=maxptime:60\r\na=ssrc:3499283094 cname:SppAtg+R/G1ZUZIy\r\na=ssrc:3499283094 msid:streamSCaudio trackSCaudio\r\na=ssrc:3499283094 mslabel:streamSCaudio\r\na=ssrc:3499283094 label:trackSCaudio\r\n",
+    "to_token" : "UcvkOLl/skbAxJ+1s4LE5eR5h8QVLtri96vORUCcd/qDE8nWFCKjRgOx2hjoQ0wRPoz1iOKcyUHUOnvxEoaZ2/uym3c24xV/WdK/Bbk+5gE=",
+    "turn" : "turn:54.175.233.40:3478"
+}
+
+
+a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:bhn3DDDcf7GhHEnFkGLW9V223XncT60nJrTQK06x
+ssrc:1378587563 
+
+
+2016-07-08 13:50:50.635 Button[9087:293133] [voe] [VOE_DBG] int_thread_sigMessageReceived message:
+2016-07-08 13:50:50.635 Button[9087:293133] [voe] [VOE_DBG] _id:            751853E6_1
+2016-07-08 13:50:50.635 Button[9087:293133] [voe] [VOE_DBG] _to:            08ab7725ceb412cd65386dad279b772eda139472
+2016-07-08 13:50:50.636 Button[9087:293133] [voe] [VOE_DBG] _from:          US_468860bf65f8f7820c03a34484771d6e785b9494
+2016-07-08 13:50:50.636 Button[9087:293133] [voe] [VOE_DBG] _from_device:   561E23FF011F150015000061
+2016-07-08 13:50:50.636 Button[9087:293133] [voe] [VOE_DBG] _to_device:     57345A0DCDCE980DDE000001
+2016-07-08 13:50:50.636 Button[9087:293133] [voe] [VOE_DBG] _type:          kSigMethodOk
+2016-07-08 13:50:50.636 Button[9087:293133] [voe] [VOE_DBG] _order:         1
+2016-07-08 13:50:50.636 Button[9087:293133] [voe] [VOE_DBG] _version:       1.0
+2016-07-08 13:50:50.637 Button[9087:293133] [voe] [VOE_DBG] _bin_date:      
+{
+    "call_id" : "d3b729cb",
+    "sdp" : "v=0\r\no=- 9002670222824738267 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE audio\r\na=msid-semantic: WMS streamSCaudio\r\nm=audio 9 RTP/SAVPF 8 111 103 104 9 102 0 106 105 13 127 126\r\nc=IN IP4 0.0.0.0\r\na=rtcp:9 IN IP4 0.0.0.0\r\na=ice-ufrag:CZOVMpZGGn9UNv6O\r\na=ice-pwd:nSXV3cd4yV8AmxmtLry9JYrw\r\na=mid:audio\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=sendrecv\r\na=rtcp-mux\r\na=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:bhn3DDDcf7GhHEnFkGLW9V223XncT60nJrTQK06x\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:111 opus/48000/2\r\na=fmtp:111 minptime=10; useinbandfec=1\r\na=rtpmap:103 ISAC/16000\r\na=rtpmap:104 ISAC/32000\r\na=rtpmap:9 G722/8000\r\na=rtpmap:102 ILBC/8000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:106 CN/32000\r\na=rtpmap:105 CN/16000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:127 red/8000\r\na=rtpmap:126 telephone-event/8000\r\na=maxptime:60\r\na=ssrc:1378587563 cname:1ncvMa25PaDyaV7p\r\na=ssrc:1378587563 msid:streamSCaudio trackSCaudio\r\na=ssrc:1378587563 mslabel:streamSCaudio\r\na=ssrc:1378587563 label:trackSCaudio\r\n"
+}
+
