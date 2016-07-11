@@ -1,21 +1,16 @@
-
 #include "decoder.h"
 #include <iostream>
 
 #define SRTP_MASTER_KEY_LEN 30
 
 // for old libsrtp compatibility
+// #define srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80(p) srtp_crypto_policy_set_rtp_default(p)
 #ifndef srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80
 #define srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80 crypto_policy_set_aes_cm_128_hmac_sha1_80
-#endif
-
-#ifndef srtp_crypto_policy_set_aes_cm_128_hmac_sha1_32
 #define srtp_crypto_policy_set_aes_cm_128_hmac_sha1_32 crypto_policy_set_aes_cm_128_hmac_sha1_32
-#endif
-
-#ifndef srtp_ssrc_type_t
 #define srtp_ssrc_type_t ssrc_type_t
 #endif
+
 
 #ifndef srtp_err_status_ok
 #define srtp_err_status_ok 0

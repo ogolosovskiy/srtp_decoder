@@ -4,6 +4,8 @@
 #include "decoder.h"
 #include "base64.h"
 #include "pcap.h"
+#include <string>
+#include <iostream>
 #include <cassert>
 
 #include "pcap_reader.h"
@@ -37,6 +39,7 @@ int SrtpCryptoSuiteFromName(const std::string& crypto_suite) {
 
 int main(int argc, char* argv[])
 {
+  
 
 	if (argc < 6) {
 		std::cerr << "Usage: srtp_decoder[.exe] input_tcpdump_pcap_path output_decoded_payload_path ssrc_rtp_hex_format Base64_master_key sha_Crypto_Suite" << std::endl;
@@ -52,7 +55,7 @@ int main(int argc, char* argv[])
 	std::string ssrc_str = argv[3];
 	std::string keyBase64 = argv[4];
 	std::string sha = argv[5];
-	params.ssrc = (long)std::stoll(ssrc_str, 0, 16);
+	params.ssrc = strtoul(ssrc_str.c_str(), 0, 16);
 
 	std::cout << "tcpdump pcap path: " << input_path << std::endl;
 	std::cout << "output RTP payload path: " << output_path << std::endl;
@@ -81,7 +84,7 @@ int main(int argc, char* argv[])
 	std::cout << std::endl << "CRYPTO ready" << std::endl;
 
 
-	std::ofstream r_file(output_path, std::ofstream::binary);
+	std::ofstream r_file(output_path.c_str());
 
 	std::cout << std::endl << "Start DECODE" << std::endl;
 	int count = 0;

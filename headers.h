@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <cstdint>
+#include <stdint.h>
 #include <vector>
 #include <memory>
 #include <list>
