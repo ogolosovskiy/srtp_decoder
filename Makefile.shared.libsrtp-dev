@@ -1,0 +1,20 @@
+CC=g++
+CFLAGS=-c -Wall -std=c++11 -fPIC 
+LDLIBS = -shared -fPIC -lsrtp -lpcap
+
+LDFLAGS=
+SOURCES=base64.cpp  decoder.cpp  pcap_reader.cpp  srtp_decoder.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=srtp_decoder
+
+all: $(SOURCES) $(EXECUTABLE)
+
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(LDLIBS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -f *.o

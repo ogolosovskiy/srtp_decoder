@@ -11,3 +11,6 @@ to play pcm
 http://www.audacityteam.org/  
 File->Import->Raw data-> A-Law:Little-Endian:1 Channel(Mono):0:100:8000Hz  
 
+Linux:  
+  
+sudo apt-get install  libsrtp-dev

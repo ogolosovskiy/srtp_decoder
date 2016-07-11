@@ -9,6 +9,10 @@
 #include <iostream>
 #include "pcap.h"
 
+
+#include <netinet/ip.h>
+#include <arpa/inet.h>
+
 /* 4 bytes IP address */
 typedef struct ip_address
 {
@@ -54,14 +58,14 @@ typedef struct {
 	uint16_t seq;		/* sequence number        */
 	uint32_t ts;		/* timestamp              */
 	uint32_t ssrc;	/* synchronization source */
-} srtp_hdr_t;
+} _rtp_hdr_t;
 
 
 /* RTP Header Extension*/
 typedef struct {
 	uint16_t defined_by_profile;
 	uint16_t extension_len;
-} srtp_hdr_ex_t;
+} _rtp_hdr_ex_t;
 
 /* RTP RFC5285 Header Extension*/
 typedef struct {
