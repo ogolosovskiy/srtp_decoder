@@ -31,13 +31,13 @@ void p_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pk
 	ip_header *ih;
 	udp_header *uh;
 	u_int ip_len;
-	u_short sport, dport;
+	//	u_short sport, dport;
 	time_t local_tv_sec;
 
 	/*
 	* unused parameter
 	*/
-	(VOID)(param);
+	(void)(param);
 
 	/* convert the timestamp to readable format */
 	local_tv_sec = header->ts.tv_sec;
@@ -58,8 +58,8 @@ void p_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pk
 	uh = (udp_header *)((u_char*)ih + ip_len);
 
 	/* convert from network byte order to host byte order */
-	sport = ntohs(uh->sport);
-	dport = ntohs(uh->dport);
+	//sport = ntohs(uh->sport);
+	//dport = ntohs(uh->dport);
 
 	/* print ip addresses and udp ports */
 /*	printf("%s.%.6d	%d.%d.%d.%d:%d -> %d.%d.%d.%d:%d  length:%d  \n",
@@ -78,8 +78,8 @@ void p_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pk
 		);
 		*/
 
-	if (header->len == 127)
-		int fff = 0;
+	//if (header->len == 127)
+	//	int fff = 0;
 
 	int const udp_header_size = 8;
 	int const turn_header_size = 4;
@@ -103,12 +103,12 @@ void p_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pk
 		rtp_body = (char*)uh + udp_header_size;
 	}
 
-	srtp_hdr_t *hdr = (srtp_hdr_t *)rtp_body;
+	_rtp_hdr_t *hdr = (_rtp_hdr_t *)rtp_body;
 	bool is_rtp = hdr->version == 2;
 
 	if (is_rtp)
 	{
-		int debug_ssrc = ntohl(hdr->ssrc);
+	  //	int debug_ssrc = ntohl(hdr->ssrc);
 		if (ssrc == ntohl(hdr->ssrc))
 		{
 			srtp_packet_t srtp_packet(rtp_body, rtp_body + rtp_size);
@@ -129,7 +129,7 @@ bool read_pcap(std::string const& file)
 {
 	pcap_t *fp;
 	char errbuf[PCAP_ERRBUF_SIZE];
-	u_int i = 0;
+	//u_int i = 0;
 	struct bpf_program fcode;
 
 	/* Open the capture file */

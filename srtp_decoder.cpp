@@ -92,6 +92,8 @@ int main(int argc, char* argv[])
 		char* srtp_buffer = i->data();
 		int length = i->size();
 		bool suc = srtp_decoder.UnprotectRtp(srtp_buffer, length, &rtp_length);
+		if(!suc)
+		  std::cerr << "can't decrypt packet" << std::endl;
 		srtp_hdr_t *hdr = (srtp_hdr_t *)srtp_buffer;
 		int rtp_header_size = sizeof(srtp_hdr_t);
 		char* payload = srtp_buffer + rtp_header_size;
@@ -99,8 +101,8 @@ int main(int argc, char* argv[])
 		{
 			// If the X bit in the RTP header is one, a variable - length header
 			// extension MUST be appended to the RTP header, following the CSRC list if present.
-			srtp_hdr_ex_t* hdr_ex = (srtp_hdr_ex_t *)payload;
-			payload			+= sizeof(srtp_hdr_ex_t);
+			_rtp_hdr_ex_t* hdr_ex = (_rtp_hdr_ex_t *)payload;
+			payload			+= sizeof(_rtp_hdr_ex_t);
 
 			// calculate extensions RFC5285
 			int number_of_extensions = htons(hdr_ex->extension_len);

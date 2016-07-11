@@ -1,9 +1,8 @@
 
 #include "decoder.h"
-
+#include <iostream>
 
 #define SRTP_MASTER_KEY_LEN 30
-
 
 const int SRTP_MASTER_KEY_BASE64_LEN = SRTP_MASTER_KEY_LEN * 4 / 3;
 const int SRTP_MASTER_KEY_KEY_LEN = 16;
@@ -31,14 +30,14 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 
 	bool SrtpSession::UnprotectRtp(void* p, int in_len, int* out_len) {
 		if (!session_) {
-//			LOG(LS_WARNING) << "Failed to unprotect SRTP packet: no SRTP Session";
+		  std::cerr << "Failed to unprotect SRTP packet: no SRTP Session";
 			return false;
 		}
 
 		*out_len = in_len;
 		int err = srtp_unprotect(session_, p, out_len);
-		if (err != err_status_ok) {
-	//		LOG(LS_WARNING) << "Failed to unprotect SRTP packet, err=" << err;
+		if (err != 0) {
+		  std::cerr << "Failed to unprotect SRTP packet, err=" << err;
 			return false;
 		}
 		return true;
@@ -46,7 +45,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 
 	bool SrtpSession::SetKey(int type, int cs, const uint8_t* key, int len) {
 		if (session_) {
-//			LOG(LS_ERROR) << "Failed to create SRTP session: " << "SRTP session already created";
+			std::cerr << "Failed to create SRTP session: " << "SRTP session already created";
 			return false;
 		}
 
@@ -58,12 +57,12 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 		memset(&policy, 0, sizeof(policy));
 
 		if (cs == SRTP_AES128_CM_SHA1_80) {
-			crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtp);
-			crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtcp);
+			srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtp);
+			srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtcp);
 		}
 		else if (cs == SRTP_AES128_CM_SHA1_32) {
-			crypto_policy_set_aes_cm_128_hmac_sha1_32(&policy.rtp);   // rtp is 32,
-			crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtcp);  // rtcp still 80
+			srtp_crypto_policy_set_aes_cm_128_hmac_sha1_32(&policy.rtp);   // rtp is 32,
+			srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtcp);  // rtcp still 80
 		}
 		else {
 	//		LOG(LS_WARNING) << "Failed to create SRTP session: unsupported"	<< " cipher_suite " << cs;
@@ -75,7 +74,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 			return false;
 		}
 
-		policy.ssrc.type = static_cast<ssrc_type_t>(type);
+		policy.ssrc.type = static_cast<srtp_ssrc_type_t>(type);
 		policy.ssrc.value = 0;
 		policy.key = const_cast<uint8_t*>(key);
 		// TODO(astor) parse window size from WSH session-param
@@ -88,7 +87,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 		policy.next = NULL;
 
 		int err = srtp_create(&session_, &policy);
-		if (err != err_status_ok) {
+		if (err != srtp_err_status_ok) {
 			session_ = NULL;
 //			LOG(LS_ERROR) << "Failed to create SRTP session, err=" << err;
 			return false;
@@ -104,7 +103,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 		if (!inited_) {
 			int err;
 			err = srtp_init();
-			if (err != err_status_ok) {
+			if (err != srtp_err_status_ok) {
 //				LOG(LS_ERROR) << "Failed to init SRTP, err=" << err;
 				return false;
 			}
@@ -125,7 +124,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 		if (inited_) {
 			int err = srtp_shutdown();
 			if (err) {
-//				LOG(LS_ERROR) << "srtp_shutdown failed. err=" << err;
+			  std::cerr << "srtp_shutdown failed. err=" << err;
 				return;
 			}
 			inited_ = false;
