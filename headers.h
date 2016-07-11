@@ -9,9 +9,10 @@
 #include <iostream>
 #include "pcap.h"
 
-
-#include <netinet/ip.h>
-#include <arpa/inet.h>
+#ifdef __linux__ 
+#	include <netinet/ip.h>
+#	include <arpa/inet.h>
+#endif
 
 /* 4 bytes IP address */
 typedef struct ip_address
@@ -58,14 +59,14 @@ typedef struct {
 	uint16_t seq;		/* sequence number        */
 	uint32_t ts;		/* timestamp              */
 	uint32_t ssrc;	/* synchronization source */
-} _rtp_hdr_t;
+} common_rtp_hdr_t;
 
 
 /* RTP Header Extension*/
 typedef struct {
 	uint16_t defined_by_profile;
 	uint16_t extension_len;
-} _rtp_hdr_ex_t;
+} common_rtp_hdr_ex_t;
 
 /* RTP RFC5285 Header Extension*/
 typedef struct {
@@ -159,4 +160,11 @@ struct	ether_header {
 
 
 typedef std::vector<char> srtp_packet_t;
-typedef std::unique_ptr< std::list<srtp_packet_t> > srtp_packets_t;
+typedef std::list<srtp_packet_t> srtp_packets_t;
+
+
+struct global_params
+{
+	srtp_packets_t srtp_stream;
+	long ssrc;
+};

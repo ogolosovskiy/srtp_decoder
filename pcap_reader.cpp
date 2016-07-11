@@ -3,9 +3,6 @@
 #include "pcap_reader.h"
 #include <cassert>
 
-extern srtp_packets_t srtp_stream;
-extern long ssrc;
-
 bool is_ip_over_eth(const u_char* packet)
 {
 	struct ether_header *eptr;  /* net/ethernet.h */
@@ -26,6 +23,9 @@ bool is_ip_over_eth(const u_char* packet)
 /* Callback function invoked by libpcap for every incoming packet */
 void p_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pkt_data)
 {
+
+	global_params* params = reinterpret_cast<global_params*>(param);
+
 	struct tm *ltime;
 	char timestr[16];
 	ip_header *ih;
@@ -103,16 +103,16 @@ void p_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pk
 		rtp_body = (char*)uh + udp_header_size;
 	}
 
-	_rtp_hdr_t *hdr = (_rtp_hdr_t *)rtp_body;
+	common_rtp_hdr_t *hdr = (common_rtp_hdr_t *)rtp_body;
 	bool is_rtp = hdr->version == 2;
 
 	if (is_rtp)
 	{
 	  //	int debug_ssrc = ntohl(hdr->ssrc);
-		if (ssrc == ntohl(hdr->ssrc))
+		if (params->ssrc == ntohl(hdr->ssrc))
 		{
 			srtp_packet_t srtp_packet(rtp_body, rtp_body + rtp_size);
-			srtp_stream->push_back(srtp_packet);
+			params->srtp_stream.push_back(srtp_packet);
 //			printf("new rtp packet, seq %d\n", ntohl(hdr->seq));
 		}
 //		else
@@ -125,7 +125,7 @@ void p_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pk
 }
 
 
-bool read_pcap(std::string const& file)
+bool read_pcap(std::string const& file, global_params& params)
 {
 	pcap_t *fp;
 	char errbuf[PCAP_ERRBUF_SIZE];
@@ -167,7 +167,7 @@ bool read_pcap(std::string const& file)
 
 	}
 
-	pcap_loop(fp, 0, &p_handler, NULL);
+	pcap_loop(fp, 0, &p_handler, (u_char*)(&params));
 
 
 	pcap_close(fp);

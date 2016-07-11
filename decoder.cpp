@@ -4,6 +4,23 @@
 
 #define SRTP_MASTER_KEY_LEN 30
 
+// for old libsrtp compatibility
+#ifndef srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80
+#define srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80 crypto_policy_set_aes_cm_128_hmac_sha1_80
+#endif
+
+#ifndef srtp_crypto_policy_set_aes_cm_128_hmac_sha1_32
+#define srtp_crypto_policy_set_aes_cm_128_hmac_sha1_32 crypto_policy_set_aes_cm_128_hmac_sha1_32
+#endif
+
+#ifndef srtp_ssrc_type_t
+#define srtp_ssrc_type_t ssrc_type_t
+#endif
+
+#ifndef srtp_err_status_ok
+#define srtp_err_status_ok 0
+#endif
+
 const int SRTP_MASTER_KEY_BASE64_LEN = SRTP_MASTER_KEY_LEN * 4 / 3;
 const int SRTP_MASTER_KEY_KEY_LEN = 16;
 int SRTP_MASTER_KEY_SALT_LEN = 14;
@@ -65,12 +82,12 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 			srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtcp);  // rtcp still 80
 		}
 		else {
-	//		LOG(LS_WARNING) << "Failed to create SRTP session: unsupported"	<< " cipher_suite " << cs;
+			std::cerr << "Failed to create SRTP session: unsupported" << " cipher_suite " << cs;
 			return false;
 		}
 
 		if (!key || len != SRTP_MASTER_KEY_LEN) {
-//			LOG(LS_WARNING) << "Failed to create SRTP session: invalid key";
+			std::cerr << "Failed to create SRTP session: invalid key";
 			return false;
 		}
 
@@ -89,7 +106,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 		int err = srtp_create(&session_, &policy);
 		if (err != srtp_err_status_ok) {
 			session_ = NULL;
-//			LOG(LS_ERROR) << "Failed to create SRTP session, err=" << err;
+			std::cerr << "Failed to create SRTP session, err=" << err;
 			return false;
 		}
 
@@ -104,7 +121,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 			int err;
 			err = srtp_init();
 			if (err != srtp_err_status_ok) {
-//				LOG(LS_ERROR) << "Failed to init SRTP, err=" << err;
+				std::cerr << "Failed to init SRTP, err=" << err;
 				return false;
 			}
 
