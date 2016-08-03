@@ -1,5 +1,15 @@
 
 
+How to compile linux/osx
+install libsrtp (https://github.com/dozeo/libsrtp I recomend)
+install libpcap
+mkdir build
+cd build
+cmake ..
+make
+enjoy !
+
+
 How to compile windows version:  
 open srtp_decoder.sln   
 setup include/lib path to   
