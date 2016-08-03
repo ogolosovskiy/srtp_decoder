@@ -46,7 +46,7 @@ else (PCAP_INCLUDE_DIR)
 endif (PCAP_INCLUDE_DIR)
 
 if (PCAP_FOUND)
-   target_link_libraries(example PUBLIC
+   target_link_libraries(srtp_decoder PUBLIC
    	${PCAP_LIBRARIES}
    )
 endif (PCAP_FOUND)
@@ -79,7 +79,7 @@ else()
 endif()
 
 if (SRTP_LIBRARIES)
-   target_link_libraries(example PUBLIC
+   target_link_libraries(srtp_decoder PUBLIC
         ${SRTP_LIBRARIES}
    )
 endif (SRTP_LIBRARIES)
@@ -92,7 +92,7 @@ include_directories(${SRTP_INCLUDE_DIRS})
 
 # all install commands get the same destination. this allows us to use paths
 # relative to the executable.
-install(TARGETS example DESTINATION example_destination)
+install(TARGETS srtp_decoder DESTINATION example_destination)
 # this is basically a repeat of the file copy instruction that copies the
 # resources in the build directory, but here we tell cmake that we want it
 # in the package
