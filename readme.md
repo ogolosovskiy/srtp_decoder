@@ -1,5 +1,10 @@
 
 
+Supports:  
+WebRTC/Regular_RTP  
+Turn/RTP RTP Extensions  
+
+
 *How to compile linux/mac*  
 install libsrtp (https://github.com/dozeo/libsrtp I recomend)  
 install libpcap  
