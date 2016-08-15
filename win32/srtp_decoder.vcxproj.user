@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>.\tests\Cisco_PCMA_SDES.pcap .\tests\output\marselesa.alw 0xdeadbeef aSBrbm93IGFsbCB5b3VyIGxpdHRsZSBzZWNyZXRz  AES_CM_128_HMAC_SHA1_80</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>..\tests\webrtc_opus_p2p.pcap ..\tests\output\webrtc_opus_p2p.payload 0x20C23467 FfLxRxclZ/lNM/g5MNSZgmvAUzR/pgSIVyOHUHji AES_CM_128_HMAC_SHA1_80 true</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

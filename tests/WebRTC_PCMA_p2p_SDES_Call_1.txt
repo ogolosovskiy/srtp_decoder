@@ -1,2 +1,2 @@
-..\win32\Debug\srtp_decoder.exe .\WebRTC_PCMA_p2p_SDES_Call_1.pcap  .\output\WebRTC_PCMA_p2p_SDES_Call_1_1.pcma 0xD092D296 7SYMKhu8sVMhCr4VXh+ZqkteB01QgqDSgLr4L9iU  AES_CM_128_HMAC_SHA1_80
-..\win32\Debug\srtp_decoder.exe .\WebRTC_PCMA_p2p_SDES_Call_1.pcap  .\output\WebRTC_PCMA_p2p_SDES_Call_1_2.pcma 0x522B93AB bhn3DDDcf7GhHEnFkGLW9V223XncT60nJrTQK06x  AES_CM_128_HMAC_SHA1_80
+..\win32\Debug\srtp_decoder.exe .\WebRTC_PCMA_p2p_SDES_Call_1.pcap  .\output\WebRTC_PCMA_p2p_SDES_Call_1_1.pcma 0xD092D296 7SYMKhu8sVMhCr4VXh+ZqkteB01QgqDSgLr4L9iU  AES_CM_128_HMAC_SHA1_80 false
+..\win32\Debug\srtp_decoder.exe .\WebRTC_PCMA_p2p_SDES_Call_1.pcap  .\output\WebRTC_PCMA_p2p_SDES_Call_1_2.pcma 0x522B93AB bhn3DDDcf7GhHEnFkGLW9V223XncT60nJrTQK06x  AES_CM_128_HMAC_SHA1_80 false

@@ -42,14 +42,14 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 
 	bool SrtpSession::UnprotectRtp(void* p, int in_len, int* out_len) {
 		if (!session_) {
-		  std::cerr << "Failed to unprotect SRTP packet: no SRTP Session";
+		  std::cerr << "Warning: Failed to unprotect SRTP packet: no SRTP Session";
 			return false;
 		}
 
 		*out_len = in_len;
 		int err = srtp_unprotect(session_, p, out_len);
 		if (err != 0) {
-		  std::cerr << "Failed to unprotect SRTP packet, err=" << err;
+		  std::cerr << "Warning: Failed to unprotect SRTP packet, err=" << err;
 			return false;
 		}
 		return true;
@@ -57,7 +57,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 
 	bool SrtpSession::SetKey(int type, int cs, const uint8_t* key, int len) {
 		if (session_) {
-			std::cerr << "Failed to create SRTP session: " << "SRTP session already created";
+			std::cerr << "Warning: Failed to create SRTP session: " << "SRTP session already created";
 			return false;
 		}
 
@@ -77,12 +77,14 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 			srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtcp);  // rtcp still 80
 		}
 		else {
-			std::cerr << "Failed to create SRTP session: unsupported" << " cipher_suite " << cs;
+			std::cerr << "Error: Failed to create SRTP session: unsupported" << " cipher_suite " << cs;
+			throw std::runtime_error("SRTP fails");
 			return false;
 		}
 
 		if (!key || len != SRTP_MASTER_KEY_LEN) {
-			std::cerr << "Failed to create SRTP session: invalid key";
+			std::cerr << "Error: Failed to create SRTP session: invalid key";
+			throw std::runtime_error("SRTP fails");
 			return false;
 		}
 
@@ -101,7 +103,8 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 		int err = srtp_create(&session_, &policy);
 		if (err != srtp_err_status_ok) {
 			session_ = NULL;
-			std::cerr << "Failed to create SRTP session, err=" << err;
+			std::cerr << "Error: Failed to create SRTP session, err=" << err;
+			throw std::runtime_error("SRTP fails");
 			return false;
 		}
 
@@ -116,7 +119,8 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 			int err;
 			err = srtp_init();
 			if (err != srtp_err_status_ok) {
-				std::cerr << "Failed to init SRTP, err=" << err;
+				std::cerr << "Error: Failed to init SRTP, err=" << err;
+				throw std::runtime_error("SRTP fails");
 				return false;
 			}
 
@@ -136,7 +140,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 		if (inited_) {
 			int err = srtp_shutdown();
 			if (err) {
-			  std::cerr << "srtp_shutdown failed. err=" << err;
+			  std::cerr << "Warning: srtp_shutdown failed. err=" << err;
 				return;
 			}
 			inited_ = false;

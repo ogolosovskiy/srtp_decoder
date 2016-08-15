@@ -159,7 +159,7 @@ struct	ether_header {
 #endif
 
 
-typedef std::vector<char> srtp_packet_t;
+typedef std::vector<unsigned char> srtp_packet_t;
 typedef std::list<srtp_packet_t> srtp_packets_t;
 
 
