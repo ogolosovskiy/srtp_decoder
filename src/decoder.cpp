@@ -77,13 +77,13 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 			srtp_crypto_policy_set_aes_cm_128_hmac_sha1_80(&policy.rtcp);  // rtcp still 80
 		}
 		else {
-			std::cerr << "Error: Failed to create SRTP session: unsupported" << " cipher_suite " << cs;
+			std::cerr << "ERROR: Failed to create SRTP session: unsupported" << " cipher_suite " << cs;
 			throw std::runtime_error("SRTP fails");
 			return false;
 		}
 
 		if (!key || len != SRTP_MASTER_KEY_LEN) {
-			std::cerr << "Error: Failed to create SRTP session: invalid key";
+			std::cerr << "ERROR: Failed to create SRTP session: invalid key";
 			throw std::runtime_error("SRTP fails");
 			return false;
 		}
@@ -103,7 +103,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 		int err = srtp_create(&session_, &policy);
 		if (err != srtp_err_status_ok) {
 			session_ = NULL;
-			std::cerr << "Error: Failed to create SRTP session, err=" << err;
+			std::cerr << "ERROR: Failed to create SRTP session, err=" << err;
 			throw std::runtime_error("SRTP fails");
 			return false;
 		}
@@ -119,7 +119,7 @@ int SRTP_MASTER_KEY_SALT_LEN = 14;
 			int err;
 			err = srtp_init();
 			if (err != srtp_err_status_ok) {
-				std::cerr << "Error: Failed to init SRTP, err=" << err;
+				std::cerr << "ERROR: Failed to init SRTP, err=" << err;
 				throw std::runtime_error("SRTP fails");
 				return false;
 			}

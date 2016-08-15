@@ -20,7 +20,7 @@ bool ParseKeyParams(const std::string& key_params, uint8_t* key, int len) {
 	if (!Base64::Decode(key_b64, Base64::DO_STRICT,
 		&key_str, NULL) ||
 		static_cast<int>(key_str.size()) != len) {
-		std::cerr << "Error: Bad master key encoding, cant unbase64" << std::endl;
+		std::cerr << "ERROR: Bad master key encoding, cant unbase64" << std::endl;
 		throw std::runtime_error("SRTP fails");
 		return false;
 	}
@@ -47,14 +47,14 @@ static void int_to_char(unsigned int i, unsigned char ch[4])
 
 int main(int argc, char* argv[])
 {
-  
+	std::cout << "SRTP decoder Version 1.00" << std::endl;
+
 	if (argc < 7) {
-		std::cerr << "Error: Bad arguments" << std::endl;
+		std::cerr << "ERROR: Bad arguments:" << std::endl;
 		std::cout << "Usage: srtp_decoder[.exe] input_tcpdump_pcap_path output_decoded_payload_path ssrc_rtp_hex_format Base64_master_key sha_Crypto_Suite container[true/false]" << std::endl;
 		std::cout << "Examples: "
-			<< std::endl << "srtp_decoder ..\\tests\\pcma.pcap ..\\tests\\pcma.paylaod 0xdeadbeef aSBrbm93IGFsbCB5b3VyIGxpdHRsZSBzZWNyZXRz AES_CM_128_HMAC_SHA1_80 false" << std::endl \
-			<< std::endl << "srtp_decoder ..\\tests\\webrtc_opus_p2p.pcap ..\\tests\\output\\webrtc_opus_p2p.payload 0x20C23467 FfLxRxclZ/lNM/g5MNSZgmvAUzR/pgSIVyOHUHji AES_CM_128_HMAC_SHA1_80 true" << std::endl;
-		std::cout << "container[true/false] format todo:" << std::endl;
+			<< std::endl << "srtp_decoder ./tests/pcma.pcap ./tests/pcma.paylaod 0xdeadbeef aSBrbm93IGFsbCB5b3VyIGxpdHRsZSBzZWNyZXRz AES_CM_128_HMAC_SHA1_80 false" \
+			<< std::endl << "srtp_decoder ./tests/webrtc_opus_p2p.pcap ./tests/output/webrtc_opus_p2p.payload 0x20C23467 FfLxRxclZ/lNM/g5MNSZgmvAUzR/pgSIVyOHUHji AES_CM_128_HMAC_SHA1_80 true" << std::endl;
 		return 1;
 	}
 
@@ -69,19 +69,19 @@ int main(int argc, char* argv[])
 	params.ssrc = strtoul(ssrc_str.c_str(), 0, 16);
 	bool container = std::string(argv[6]) == std::string("true");
 
-	std::cout << "	tcpdump pcap path: " << input_path << std::endl;
-	std::cout << "	output RTP payload path: " << output_path << std::endl;
-	std::cout << "	32-bit SSRC identifier: 0x" << std::hex << params.ssrc << std::dec << std::endl;
-	std::cout << "	AES Base64 crypto key: " << keyBase64 << std::endl;
-	std::cout << "	crypto-suite: " << sha << std::endl;
-	std::cout << "	payload packaging: " << (container ? "true" : "false") << std::endl;
+	std::cout << "pcap file: " << input_path << std::endl;
+	std::cout << "payload file: " << output_path << std::endl;
+	std::cout << "32-bit SSRC identifier: 0x" << std::hex << params.ssrc << std::dec << std::endl;
+	std::cout << "AES Base64 crypto key: " << keyBase64 << std::endl;
+	std::cout << "crypto-suite: " << sha << std::endl;
+	std::cout << "payload packaging: " << (container ? "true" : "false") << std::endl << std::endl;
 
 	try {
 
 		bool succ = read_pcap(input_path, params);
 		if (!succ)
 			return 1;
-		std::cout << std::endl << "PCAP file has " << params.srtp_stream.size() << " RTP packets (ssrc: 0x" << std::hex << params.ssrc << ")" << std::dec << std::endl;
+		std::cout << "Found " << params.srtp_stream.size() << " RTP packets (ssrc: 0x" << std::hex << params.ssrc << ")" << std::dec << std::endl;
 
 
 		SrtpSession srtp_decoder;
@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 
 		std::ofstream payload_file(output_path.c_str(), std::ofstream::out | std::ofstream::binary);
 
-		std::cout << std::endl << "start decoding filtered SRTP" << std::endl;
+//		std::cout << std::endl << "start decoding filtered SRTP" << std::endl;
 		int count = 0;
 
 		for (srtp_packets_t::iterator i = params.srtp_stream.begin(), lim = params.srtp_stream.end(); i != lim; i++)
@@ -157,9 +157,7 @@ int main(int argc, char* argv[])
 //			std::cout << count << " frame size: " << frame_size << std::endl;
 		}
 		payload_file.close();
-
-		std::cout << std::endl << "wrote " << count << " payload chunks " << std::endl;
-
+		std::cout << "Wrote " << count << " payload chunks " << std::endl;
 		srtp_decoder.Terminate();
 
 	}
