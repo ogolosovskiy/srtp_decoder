@@ -1,28 +1,55 @@
+## *This tool:*
+ * decodes pcap (Packet Capture) format
+ * extracts RTP packets
+ * filters packets by SSRC
+ * decodes secure
+ * write payload to output file
 
+RTP can be packed in different way.  
+Supports stream: WebRTC, Regular SRTP, Turn Extensions.  
 
-Supports:  
-WebRTC/Regular_RTP  
-Turn/RTP RTP Extensions  
+To store opus packets in a file, you need some kind of container format that stores the packet boundaries. I am using https://www.opus-codec.org simple container format.  
+Option: container[true/false] - switches on/off this feature.
 
+### *Usage:*
+ srtp_decoder[.exe] input output ssrc key sha container
+ * input - input pcap file path (Not pcapng!!!, just pcap)
+ * output - output pcm file path 
+ * ssrc - RTP stream identifier https://tools.ietf.org/html/rfc3550#page-59 hex with 0x prefix
+ * sha - crypto suite name https://tools.ietf.org/html/rfc4568#page-16
+ * container - true/false see feature description above
 
-*How to compile linux/mac*  
+### *Compiling:*
+
+```bash
+git clone https://github.com/ogolosovskiy/srtp_decoder.git
+cd srtp_decoder
+mkdir build
+cd build
+cmake ..
+make
+export PATH=`pwd`:"$PATH"
+```
+
+```bash
+./win32/srtp_decoder.sln
+```
+
+### *Prerequrements linux/mac*
 install libsrtp (https://github.com/dozeo/libsrtp I recomend)  
 install libpcap  
-mkdir build  
-cd build  
-cmake ..  
-make  
-enjoy !  
   
+### *Prerequrements windows*
   
-*How to compile windows version:*  
-open srtp_decoder.sln   
 setup include/lib path to   
 libsrtp  https://github.com/cisco/libsrtp  
 winpcap https://www.winpcap.org/devel.htm  
  
-  
-*How to play pcm*  
+
+### *How to play pcm*  
 http://www.audacityteam.org/  
 File->Import->Raw data-> A-Law:Little-Endian:1 Channel(Mono):0:100:8000Hz  
+
+
+
 
