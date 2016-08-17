@@ -51,5 +51,16 @@ http://www.audacityteam.org/
 File->Import->Raw data-> A-Law:Little-Endian:1 Channel(Mono):0:100:8000Hz  
 
 
+### *SDES/DTLS srtp*  
+
+TO DO How to extract SEDS key/crypto from SDP  
+TO DO How to extract DTLS key/crypto from browser logs
+
+
+
+
+
+
+
 
 
