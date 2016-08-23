@@ -25,6 +25,7 @@ Option: container[true/false] - switches on/off this feature.
 
 ### *Compiling:*
 
+Linux/MAC  
 ```bash
 git clone https://github.com/ogolosovskiy/srtp_decoder.git
 cd srtp_decoder
@@ -34,7 +35,7 @@ cmake ..
 make
 export PATH=`pwd`:"$PATH"
 ```
-
+Windows  (VS2013 comunity edition)  
 ```bash
 ./win32/srtp_decoder.sln
 ```
