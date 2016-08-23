@@ -35,7 +35,7 @@ cmake ..
 make
 export PATH=`pwd`:"$PATH"
 ```
-Windows  (VS2013 comunity edition)  
+Windows  (Visual Studio Community 2013)  
 ```bash
 ./win32/srtp_decoder.sln
 ```
