@@ -12,9 +12,9 @@ RTP can be packed in different way.
 Supports stream: WebRTC, Regular SRTP, Turn Extensions.  
 
 To store opus packets in a file, you need some kind of container format that stores the packet boundaries. I am using https://www.opus-codec.org simple container format.  
-Use opus_demo utility from http://downloads.xiph.org/releases/opus/opus-1.1.3.tar.gz to convert OPUS to PCM. 
-Option: container[true/false] - switches on/off this feature.
-
+Option: container[true/false] - switches on/off this feature.  
+  
+  
 ### *Usage:*
  srtp_decoder[.exe] input output ssrc key sha container
  * input - input pcap file path (Not pcapng!!!, just pcap)
