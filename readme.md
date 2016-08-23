@@ -1,3 +1,6 @@
+*SRTP decoder decodes WebRTC media streams and writes decoded payload into the file*
+
+
 ## *This tool:*
  * decodes pcap (Packet Capture) format
  * extracts RTP packets
@@ -52,6 +55,19 @@ http://www.audacityteam.org/
 File->Import->Raw data-> A-Law:Little-Endian:1 Channel(Mono):0:100:8000Hz  
 
 
+### *How to play OPUS*  
+https://www.opus-codec.org  
+curl  http://downloads.xiph.org/releases/opus/opus-1.1.3.tar.gz -o opus.tar.gz  
+tar -xvf ./opus.tar.gz  
+cd opus-1.1.3/  
+./configure  
+make  
+use opus_demo for converting OPUS payload to PCM  
+ ./opus_demo -d 48000 1 payloadfile pcmfile  
+play it by audacity  
+File->Import->Raw data-> PCM 16 bit 48000Hz  
+  
+  
 ### *SDES/DTLS srtp*  
 
 TO DO How to extract SEDS key/crypto from SDP  
