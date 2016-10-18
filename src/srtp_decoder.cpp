@@ -47,7 +47,7 @@ static void int_to_char(unsigned int i, unsigned char ch[4])
 
 int main(int argc, char* argv[])
 {
-	std::cout << "SRTP decoder Version 1.00" << std::endl;
+	std::cout << "SRTP decoder Version 1.05" << std::endl;
 
 	if (argc < 7) {
 		std::cerr << "ERROR: Bad arguments:" << std::endl;

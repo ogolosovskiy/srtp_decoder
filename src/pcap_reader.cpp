@@ -90,12 +90,13 @@ void p_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pk
 	int rtp_size = 0;
 	char* rtp_body = 0;
 
-	if (turn_hdr->channel_number == 0x40)
-	{
-		rtp_size = udp_size - udp_header_size - turn_header_size;
-		rtp_body = (char*)uh + udp_header_size + turn_header_size;
-		assert(rtp_size == ntohs(turn_hdr->message_size));
-	}
+    uint8_t channel_mask = static_cast<uint8_t>(turn_hdr->channel_number);
+    if ( channel_mask == 0x40)
+    {
+        rtp_size = udp_size - udp_header_size - turn_header_size;
+        rtp_body = (char*)uh + udp_header_size + turn_header_size;
+        assert(rtp_size == ntohs(turn_hdr->message_size));
+    }
 	else
 	{
 		rtp_size = udp_size - udp_header_size;
